@@ -20,6 +20,6 @@ public class Main {
         calculation.addItems(itemList1);
         System.out.println(calculation.totalVolume());
         System.out.println(calculation.totalWeight());
-        calculation.printItems();
+        calculation.printItemsInfo();
     }
 }
