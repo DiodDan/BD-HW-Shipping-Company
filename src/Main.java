@@ -7,19 +7,13 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Item item = new Item("Box", 4, 10, 10, 10, 3);
-        item.printInfo();
-        Container container = new Container("Big Container", 4, 10, 10);
-        container.printInfo();
-        Calculation calculation = new Calculation();
-        List<Item> itemList = List.of(new Item("Box", 4, 10, 10, 10, 3),
-                                      new Item("Box1", 4, 10, 10, 15, 4));
-        List<Item> itemList1 = List.of(new Item("Box1", 4, 10, 10, 10, 3),
-                                        new Item("Box1", 4, 10, 10, 15, 4));
+        Calculation calculation = new Calculation(false);
+        List<Item> itemList = List.of(new Item("Laptop", 60, 50, 50, 6.5, 100), // 503.9 in one container
+                                      new Item("Mouse", 30, 30, 20, 0.2, 200), // 4199.29 in one container
+                                      new Item("Desktop", 100, 150, 50, 20, 150), // 100.78 in one container
+                                      new Item("LCD Screens", 120, 140, 80, 2.6, 200)); // 56.24 in one container
         calculation.addItems(itemList);
-        calculation.addItems(itemList1);
-        System.out.println(calculation.totalVolume());
-        System.out.println(calculation.totalWeight());
-        calculation.printItemsInfo();
+        System.out.println(calculation.bestShipping());
+
     }
 }

@@ -42,6 +42,10 @@ public class Item {
         this.amount = amount;
     }
 
+    public double getSpecificWeight() {
+        return this.weight / getVolume();
+    }
+
     public void printInfo() {
         System.out.println("Item: " + name + "\nVolume: " + getVolume() + "\nWeight: " + weight + "\nAmount: " + amount + "\nDimensions: " + getDimensions());
     }
