@@ -31,8 +31,8 @@ public class Calculation {
         }
         return totalWeight;
     }
-
-    public String bestShipping() throws Exception {
+    
+    private int[] getContainersAmount() throws Exception{
         List<Container> containers = new ArrayList<Container>();
         int amount = 0;
         int i = 0;
@@ -59,20 +59,33 @@ public class Calculation {
         }
 
         Container smallContainer = new Container("Small", 259, 243, 606);
+        
+        boolean canFillsmall = containers.get(containers.size() - 1).getVolume() - containers.get(containers.size() - 1).getFreeSpace() <= smallContainer.getVolume();
+        int[] answer = {canFillsmall ? containers.size() - 1 : containers.size(), canFillsmall ? 1 : 0, canFillsmall && containers.get(containers.size() - 1).getWeight() > 500 ? 1 : 0};
+          
+        System.out.println(containers.get(containers.size() - 1).getWeight());
+        return answer;
 
-        if (containers.isEmpty()) {
+
+    }
+
+    public String bestShipping() throws Exception {
+        int[] containersAmount = this.getContainersAmount();
+
+        if (containersAmount[0] == 0 && containersAmount[1] == 0) {
             return "No containers needed";
-        } else if (containers.getLast().getVolume() - containers.getLast().getFreeSpace() <= smallContainer.getVolume()) {
-            return "Big Containers: " + (containers.size() - 1) + "\nSmall Containers: 1";
+        } else if (containersAmount[1] != 0) {
+            return "Big Containers: " + containersAmount[0] + "\nSmall Containers: " + containersAmount[1];
         } else {
-            return "Big Containers: " + containers.size();
+            return "Big Containers: " + containersAmount[0];
         }
 
 
     }
 
-    public void shippingPrice() {
-
+    public int shippingPrice() throws Exception{
+        int[] containersAmount = this.getContainersAmount();
+        return containersAmount[0] * 1800 + containersAmount[1] * 1000 + containersAmount[2] * 200;
     }
 
     public void addItems(List<Item> addItems) throws Exception {

@@ -25,20 +25,24 @@ public class Container {
         if (item.getVolume() * amount > this.freeSpace) {
             throw new Exception("Not enough space in the container");
         }
-        freeSpace -= item.getVolume() * amount;
-        usedWeight += item.getWeight() * amount;
+        this.freeSpace -= item.getVolume() * amount;
+        this.usedWeight += item.getWeight() * amount;
     }
 
     public double getVolume() {
-        return height * width * length;
+        return this.height * this.width * this.length;
+    }
+    
+    public double getWeight(){
+        return this.usedWeight;  
     }
 
     public double getFreeSpace() {
-        return freeSpace;
+        return this.freeSpace;
     }
 
     public void printInfo() {
-        System.out.println("Container type: " + type + "\nContainer Volume: " + getFreeSpace());
+        System.out.println("Container type: " + this.type + "\nContainer Volume: " + this.getFreeSpace());
     }
 
 }

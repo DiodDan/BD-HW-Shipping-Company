@@ -12,8 +12,15 @@ public class Main {
                                       new Item("Mouse", 30, 30, 20, 0.2, 200), // 4199.29 in one container
                                       new Item("Desktop", 100, 150, 50, 20, 150), // 100.78 in one container
                                       new Item("LCD Screens", 120, 140, 80, 2.6, 200)); // 56.24 in one container
+        
+        double sum = 0;
+        for(Item item : itemList){
+            sum += item.getVolume() * item.getAmount();
+        }
+        System.out.println(sum);
         calculation.addItems(itemList);
         System.out.println(calculation.bestShipping());
-
+        System.out.println(calculation.shippingPrice()); 
+        
     }
 }
